@@ -19,7 +19,7 @@ function register($username, $email, $password)
      return "That username is taken - go back and choose another one.";
 
   // if ok, put in db
-  $result = mysql_query("insert into uctmathcomp_school_users values ('$username', password('$password'), '$email')");
+  $result = mysql_query("insert into uctmathcomp_school_users values ('$username', '$password', '$email')");
   if (!$result)
     return "Could not register you  in database - please try again later.";
 
@@ -37,15 +37,15 @@ function login($username, $password)
     return 0;
 
   // check if username is unique
-  $result = mysql_query("select * from uctmathcomp_school_users where username='$username' and password = old_password('$password')");
+  $result = mysql_query("select * from uctmathcomp_school_users where username='$username' and password = '$password'");
   if (!$result)
 	  return 0;
 
   $today = date('Y-m-d');
   if (mysql_num_rows($result)>0)
   {
-	$result2 = mysql_query("update uctmathcomp_school_users set count = count+1, last_login='$today' where username='$username' and password = old_password('$password')");
-	$result3 = mysql_query("select comp_uid from uctmathcomp_school_users where username='$username' and password = old_password('$password')");
+	$result2 = mysql_query("update uctmathcomp_school_users set count = count+1, last_login='$today' where username='$username' and password = '$password'");
+	$result3 = mysql_query("select comp_uid from uctmathcomp_school_users where username='$username' and password = '$password'");
 	$result4 = mysql_result($result3, 0);
 	return $result4;
   }
