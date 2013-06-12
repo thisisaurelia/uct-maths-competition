@@ -2,20 +2,20 @@
 
 function db_connect()
 {
-	$result = mysql_connect('localhost', 'uctmaoft_1', 'Ghoe1ImK');
+	$result = mysql_connect('localhost', 'root', 'pass');
 	if (!$result)
 	{
 		echo "Cannot connect";
    		return false;
 	}
 
-	$result = mysql_select_db("uctmaoft_1");
+	$result = mysql_select_db("mysql");
 	if (!$result)
 	{
 		echo "No database";
 		return false;
 	}
-
+	//echo "it worked!";
 	return $result;
 }
 
